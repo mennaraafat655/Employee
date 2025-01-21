@@ -1,6 +1,6 @@
 import 'package:employee_task/models/user_model.dart';
 import 'package:employee_task/services/user_service.dart';
-//import 'package:yarab/views/user_details.dart';
+import 'package:employee_task/views/user_details.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -33,7 +33,11 @@ class _ProfileState extends State<Profile> {
           )
         : Scaffold(
             appBar: AppBar(
-              leading: Icon(Icons.arrow_back),
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
               iconTheme: IconThemeData(color: Colors.white),
               backgroundColor: Colors.deepPurple,
               title: Center(
@@ -49,21 +53,20 @@ class _ProfileState extends State<Profile> {
             body: ListView.builder(
               itemCount: user.length,
               itemBuilder: (BuildContext context, int index) {
-                // return InkWell(
-                //   onTap: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) =>
-                //                 UserDetails(userData: user[index])));
-                //   },
-                return ListTile(
-                  leading: Text("${user[index].id}"),
-                  title: Text(user[index].name),
-                  subtitle: Text(user[index].phone),
-                  trailing: Icon(Icons.person),
-                );
-                //);
+                return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  UserDetails(userData: user[index])));
+                    },
+                    child: ListTile(
+                      leading: Text("${user[index].id}"),
+                      title: Text(user[index].name),
+                      subtitle: Text(user[index].phone),
+                      trailing: Icon(Icons.person),
+                    ));
               },
             ),
           );
